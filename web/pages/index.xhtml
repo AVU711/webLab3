@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://java.sun.com/jsf/html"
+      xml:lang="en" lang="en">
+<head>
+    <title>Стартовая страница</title>
+    <h:outputScript library="js" name="JsFile.js"/>
+</head>
+<body onload="updateDate(), updateTime()" >
+<table>
+    <tr>
+        Вансович Алексей Игоревич P3202 Вариант 21938
+    </tr>
+    <tr>
+    </tr>
+</table>
+<f:view>
+
+    <h:outputText id="time"/>
+    <br/>
+    <h:outputText id="date"/>
+
+    <h:form>
+<!--        Навигация нужна в отдельном файле-->
+        <h:commandLink  value="Перейти на главную страницу" action="main"/>
+    </h:form>
+
+</f:view>
+
+</body>
+</html>

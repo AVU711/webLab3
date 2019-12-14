@@ -1,0 +1,254 @@
+/*.container {width:400px;margin:100px auto 0;text-align:center;}*/
+
+.link{
+    text-decoration: none;
+    color: black;
+    font-family:"Gill Sans, sans-serif";font-size:25px
+}
+
+.link:before {
+    content: "";
+    background: blue;
+    /*position: absolute;*/
+    width: 100%;
+    height: 10px;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px;
+    transform: scaleX(0);
+    -webkit-transform: scale(0);
+    animation: 1s forwards no-hover-v linear;
+    -webkit-animation: 1s forwards no-hover-v linear;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    z-index: -1;
+}
+
+.link:hover:before,
+.link:focus:before {
+    animation: .5s forwards hover-v linear;
+    -webkit-animation: .5s forwards hover-v linear;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    color: white;
+}
+
+@keyframes hover-v {
+    0% {
+        transform: scaleX(0);
+        -webkit-transform: scale(0);
+        height: 5px;
+    }
+    45% {
+        transform: scaleX(1);
+        -webkit-transform: scale(1);
+        height: 5px;
+    }
+    55% {height: 5px;}
+    100% {
+        transform: scaleX(1);
+        -webkit-transform: scale(1);
+        height: 55px;
+    }
+}
+@-webkit-keyframes hover-v {
+    0% {
+        transform: scaleX(0);
+        -webkit-transform: scale(0);
+        height: 5px;
+    }
+    45% {
+        transform: scaleX(1);
+        -webkit-transform: scale(1);
+        height: 5px;
+    }
+    55% {height: 5px;}
+    100% {
+        transform: scaleX(1);
+        -webkit-transform: scale(1);
+        height: 55px;
+    }
+}
+
+@keyframes no-hover-v {
+    0% {
+        transform: scaleX(1);
+        -webkit-transform: scale(1);
+        height: 55px;
+    }
+    45% {height: 5px;}
+    55% {
+        transform: scaleX(1);
+        -webkit-transform: scale(1);
+        height: 5px;
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleX(0);
+        height: 5px;
+        opacity: .02;
+    }
+}
+@-webkit-keyframes no-hover-v {
+    0% {
+        transform: scaleX(1);
+        -webkit-transform: scale(1);
+        height: 55px;
+    }
+    45% {height: 5px;}
+    55% {
+        transform: scaleX(1);
+        -webkit-transform: scale(1);
+        height: 5px;
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleX(0);
+        height: 5px;
+        opacity: .02;
+    }
+}
+
+
+/* Кнопки*/
+
+.number-button {
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: Helvetica;
+    font-size: 20px;
+}
+
+.round{
+    max-width: 960px;
+    margin:0 auto;
+}
+
+.round .number-button{
+    color : blue;
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid blue;
+    transition: color .5s;
+}
+
+.round .number-button:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: blue;
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+}
+
+.round .number-button:hover {
+    color: #fff;
+}
+
+.round .number-button:nth-child(1):before {
+    top: 100%;
+    left: 100%;
+    transition: all .7s;
+}
+
+.round .number-button:nth-child(1):hover:before {
+    top: -30px;
+    left: -30px;
+}
+
+.round .number-button:nth-child(2):before {
+    left: -30px;
+    bottom: 100%;
+    transition: all .7s;
+}
+
+.round .number-button:nth-child(2):hover:before {
+    bottom: -50px;
+}
+
+.round .number-button:nth-child(3):before {
+    top: 0;
+    left: -200%;
+    transition: all .7s;
+}
+
+.round .number-button:nth-child(3):hover:before {
+    top: -30px;
+    left: -30px;
+}
+
+
+/*Send-button*/
+
+@keyframes sheen {
+    0% {
+        transform: skewY(-45deg) translateX(0);
+    }
+    100% {
+        transform: skewY(-45deg) translateX(12.5em);
+    }
+}
+
+.wrapper {
+    display: block;
+
+    transform: translate(-50%, -50%);
+}
+.send-button {
+    padding: 0.75em 2em;
+    text-align: center;
+    text-decoration: none;
+    color: blue;
+    border: 2px solid blue;
+    font-size: 24px;
+    display: inline-block;
+    border-radius: 0.3em;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.send-button:before{
+    content: "";
+    background-color: rgba(255,255,255,0.5);
+    height: 100%;
+    width: 3em;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -4.5em;
+    transform: skewX(-45deg) translateX(0);
+    transition: none;
+}
+
+.send-button:hover {
+    background-color: blue;
+    color: #fff;
+    border-bottom: 4px solid blue;
+}
+.send-button:hover:before{
+    transform: skewX(-45deg) translateX(13.5em);
+    transition: all 0.5s ease-in-out;
+}
+
+/*header*/
+
+.header {
+    font-size: larger;
+    display: inline-block;
+    position: relative;
+    letter-spacing: .05em;
+    color: black;
+    font-family: "Bookman Old Style";
+    text-shadow: 1px 0px 0px grey;
+
+}

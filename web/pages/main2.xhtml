@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:P="http://java.sun.com/jsf/html">
+<h:head>
+    <h:outputStylesheet library="css" name="styleOfMain.css"/>
+    <h:outputScript library="js" name="picture.js"/>
+</h:head>
+<body onload="startDrawing(),send()">
+<f:view>
+    <div id="picture" style="display:inline-block;">
+    </div>
+    <p id="TextX" class="header">Координата X</p>
+    <div style="display: inline-block" id="buttonsCoordinateX">
+        <p style="display:inline-block;">
+            <p:commandButton  value="-5" styleClass="number-button" process="@this" event="click" action="#{myBean.setX(-5)}" update="This"/>
+        </p>
+        <p style="display: inline-block">
+            <p:commandButton value="-4" styleClass="number-button"    process="@this" event="click" action="#{myBean.setX(-4)}" update="This"/>
+        </p>
+        <p style="display : inline-block;">
+            <p:commandButton  value="-3"  styleClass="number-button"   process="@this" event="click" action="#{myBean.setX(-3)}" update="This"/>
+        </p>
+        <br/>
+        <p style="display : inline-block;">
+            <p:commandButton value="-2" styleClass="number-button"   process="@this" event="click" action="#{myBean.setX(-2)}" update="This"/>
+        </p>
+        <p style="display: inline-block">
+            <p:commandButton value="-1" styleClass="number-button"   process="@this" event="click" action="#{myBean.setX(-1)}" update="This"/>
+        </p>
+        <p style="display: inline-block">
+            <p:commandButton value="0"  styleClass="number-button"   process="@this" event="click" action="#{myBean.setX(0)}" update="This"/>
+        </p>
+        <br/>
+        <p style="display:inline-block;">
+            <p:commandButton value="1" styleClass="number-button"    process="@this" event="click" action="#{myBean.setX(1)}" update="This"/>
+        </p>
+        <p style="display: inline-block">
+            <p:commandButton value="2"  styleClass="number-button"   process="@this" event="click" action="#{myBean.setX(2)}" update="This"/>
+        </p>
+        <p style="display: inline-block">
+            <p:commandButton value="3" styleClass="number-button"   process="@this" event="click" action="#{myBean.setX(3)}" update="This"/>
+        </p>
+    </div>
+    <div id="dataTable" style="display : inline-block;">
+        <p:dataTable id="data"  var="main" value="#{myBean.history}" scrollable="true" scrollHeight="200">
+            <p:column headerText="Координата X">
+                <h:outputText  value="#{main.coordinateX}"/>
+            </p:column>
+            <p:column headerText="Координата Y">
+                <h:outputText  value="#{main.coordinateY}"/>
+            </p:column>
+            <p:column  headerText="Параметр R">
+                <h:outputText  value="#{main.parametrR}"/>
+            </p:column>
+            <p:column headerText="Результат">
+                <h:outputText  value="#{main.result}"/>
+                <p:outputPanel>
+                    <script type="text/javascript">showData();</script>
+                </p:outputPanel>
+            </p:column>
+        </p:dataTable>
+    </div>
+    <div id="inputCoordinateY" style="display: inline-block">
+        <p class="header">Координата Y</p>
+        <h:form id="Y">
+            <p:inputText autocomplete="false"  id="coordinateY"  value="#{myBean.y}">
+                <p:ajax event="keyup" update="@this"/>
+            </p:inputText>
+            <p:message for="coordinateY" style="color:red;"/>
+        </h:form>
+    </div>
+
+    <div id="linkParametrR">
+        <p class="header">Параметр R</p>
+        <h:form id="R">
+            <p:commandLink  id="r1" value="1" onclick="draw(1);setR(1);showData()" update="This"  action="#{myBean.setR(1)}"  >
+            </p:commandLink>
+            <h:outputText value=" "/>
+            <p:commandLink id="r2" value="2" onclick="draw(2);setR(2);showData()" update="This" action="#{myBean.setR(2)}" />
+            <h:outputText value=" "/>
+            <p:commandLink id="r3" value="3" onclick="draw(3);setR(3);showData()" update="This" action="#{myBean.setR(3)}"  />
+            <h:outputText value=" "/>
+            <p:commandLink id="r4" value="4" onclick="draw(4);setR(4);showData()" update="This" action="#{myBean.setR(4)}"  />
+            <h:outputText value=" "/>
+            <p:commandLink id="r5" value="5" onclick="draw(5);setR(5);showData()" update="This" action="#{myBean.setR(5)}" />
+        </h:form>
+        <p style="display:none;" id="rLink"/>
+    </div>
+    <div>
+        <h:form id="This">
+            <label for="x">Координата X</label>
+            <br/>
+            <h:outputText id="x" value="#{myBean.x}"/>
+            <br/>
+            <label for="r">Параметр R</label>
+            <br/>
+            <h:outputText id="r" value="#{myBean.r}"/>
+        </h:form>
+    </div>
+    <div id="linkOnStart">
+        <p:commandLink  styleClass="link" process="@this" event="click" value="Вернуться на стартовую страницу" action="index"/>
+    </div>
+    <div id="sendButton">
+        <h:form>
+            <p:commandButton update="data" value="Отправить данные"   action="#{myBean.addDot(true)}"/>
+        </h:form>
+    </div>
+    <div id="hide">
+        <h:form id="answer" style="display:none;">
+            <h:inputHidden id="hideX"  value="#{myBean.secretX}"/>
+            <h:inputHidden id="hideY" value="#{myBean.secretY}"/>
+            <h:inputHidden id="hideR" value="#{myBean.secretR}"/>
+            <p:commandButton id="ajax"  update="data" action="#{myBean.addDot(false)}"/>
+        </h:form>
+    </div>
+</f:view>
+</body>
+</html>

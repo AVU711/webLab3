@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:P="http://java.sun.com/jsf/html">
+<h:head>
+    <h:outputScript library="js"  name="JsFile1.js"/>
+    <h:outputStylesheet library="css" name="view.css"/>
+
+</h:head>
+
+<script type="text/javascript">
+
+    var arrX = [];
+    var arrY = [];
+
+    function set(num) {
+        var p = document.getElementById("xButton");
+        p.innerHTML = num;
+    }
+    function setR(num) {
+        var p = document.getElementById("rLink");
+        p.innerHTML = num;
+
+    }
+    function setY() {
+        var p = document.getElementById("yLine");
+        p.innerHTML = N;
+    }
+
+    function startDrawing() {
+        var p = document.getElementById("id");
+        var canvas = document.createElement("canvas");
+        canvas.id = "picture";
+        canvas.width = 400;
+        canvas.height = 300;
+        p.appendChild(canvas);
+        var ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        ctx.strokeStyle = 'black';
+        ctx.moveTo(200, 400);
+        ctx.lineTo(200, 0);
+        ctx.moveTo(200, 0);
+        ctx.lineTo(195, 15);
+        ctx.moveTo(200, 0);
+        ctx.lineTo(205, 15);
+        ctx.stroke();
+        ctx.strokeStyle = "black";
+        ctx.moveTo(0, 150);
+        ctx.lineTo(400, 150);
+        ctx.moveTo(400,150);
+        ctx.lineTo(385,145);
+        ctx.moveTo(400, 150);
+        ctx.lineTo(385, 155);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function draw(num) {
+        var canvas = document.getElementById("picture");
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, 600, 400);
+        ctx.beginPath();
+        ctx.strokeStyle = 'black';
+        ctx.moveTo(200, 400);
+        ctx.lineTo(200, 0);
+        ctx.moveTo(200, 0);
+        ctx.lineTo(195, 15);
+        ctx.moveTo(200, 0);
+        ctx.lineTo(205, 15);
+        ctx.stroke();
+        ctx.strokeStyle = "black";
+        ctx.moveTo(0, 150);
+        ctx.lineTo(400, 150);
+        ctx.moveTo(400,150);
+        ctx.lineTo(385,145);
+        ctx.moveTo(400, 150);
+        ctx.lineTo(385, 155);
+        ctx.stroke();
+        ctx.closePath();
+        var R = num;
+        ctx.beginPath();
+        ctx.strokeStyle = 'blue';
+        ctx.fillStyle = 'blue';
+        ctx.strokeRect(200, 150 - R*30,R*30/2, R*30);
+        ctx.fillRect(200, 150-R*30,R*30/2, R*30);
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.moveTo(200, 150);
+        ctx.lineTo(200 - R*30, 150);
+        ctx.moveTo(200 - R*30, 150);
+        ctx.lineTo(200,150 - R*30);
+        ctx.moveTo(200,150 - R*30);
+        ctx.lineTo(200, 150);
+        ctx.strokeStyle = "blue";
+        ctx.stroke();
+        ctx.closePath();
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        ctx.arc(200, 150, R*30, Math.PI/2, Math.PI, false);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        for (var i = 0; arrX.length > i; i++){
+            ctx.beginPath();
+            ctx.fillStyle = 'red';
+            ctx.fillRect(arrX[i]*30 + 200, 150 - 30*arrY[i], 5, 5);
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+    function send() {
+        var canvas = document.getElementById("picture");
+        var ctx = canvas.getContext('2d');
+        canvas.onmousedown = function (ev1) {
+            if (document.getElementById("rLink").innerHTML != "") {
+                x = ev1.offsetX;
+                y = ev1.offsetY;
+                var elemX = document.getElementById("answer:x");
+                var elemY = document.getElementById("answer:y");
+                var elemR = document.getElementById("answer:r");
+                elemX.value = ((x - 200)/30).toFixed(2);
+                elemY.value = ((150 - y)/30).toFixed(2);
+                arrX.push(((x - 200)/30).toFixed(2));
+                arrY.push(((150 - y)/30).toFixed(2));
+                elemR.value = document.getElementById("rLink").innerHTML;
+                elem = document.getElementById("answer:ajax");
+                elem.click();
+            }
+        }
+    }
+    // setR(2); console.log('1');draw(2); console.log('2');showData(); console.log('3');PrimeFaces.ab({ s: 'sendData:r2', f: 'sendData' }); console.log('4');return false;
+    function drawDot() {
+        var canvas = document.getElementById("picture");
+        var ctx = canvas.getContext('2d');
+        var x = document.getElementById("xButton").innerHTML;
+        x = x.replace(",",".");
+        arrX.push(x);
+        x = x*30 + 200;
+        var y = document.getElementById("yLine").innerHTML;
+        y = y.replace(",",".");
+        arrY.push(y)
+        y = 150 - 30 * y;
+            ctx.beginPath();
+            ctx.fillStyle = 'red';
+            ctx.fillRect(x, y, 5, 5);
+            ctx.fill();
+            ctx.closePath();
+    }
+
+    function showData() {
+        var tr = document.getElementById("data").getElementsByTagName("tr");
+        for(var i=0;tr.length>i;i++)
+        {
+            if (i == 0){
+
+            }else {
+                var canvas = document.getElementById("picture");
+                var ctx = canvas.getContext('2d');
+                var td = tr.item(i).getElementsByTagName("td");
+                var r = document.getElementById("rLink").innerHTML;
+                if (td.length == 4) {
+                    var x = td.item(0).innerText;
+                    x = x.replace(",", ".");
+                    x = x * 30 + 200;
+                    var y = td.item(1).innerText;
+                    y = y.replace(",", ".");
+                    y = 150 - 30 * y;
+                    if (r == td.item(2).innerText) {
+                        if (td.item(3).innerText == 'Промах') {
+                            ctx.beginPath();
+                            ctx.fillStyle = 'red';
+                            ctx.fillRect(x, y, 5, 5);
+                            ctx.fill();
+                            ctx.closePath();
+                        } else {
+                            ctx.beginPath();
+                            ctx.fillStyle = 'green';
+                            ctx.fillRect(x, y, 5, 5);
+                            ctx.fill();
+                            ctx.closePath();
+                        }
+                    }else {
+                        ctx.beginPath();
+                        ctx.fillStyle = 'yellow';
+                        ctx.fillRect(x, y, 5, 5);
+                        ctx.fill();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+</script>
+
+<body onload="startDrawing(), send()">
+    <table>
+        <tr>
+            <td width="700" >
+                <p id="id"/>
+                <p>
+                <f:view>
+                    <p:dataTable id="data" var="main" value="#{mainBean.history}">
+                        <p:column headerText="Координата X">
+                            <h:outputText  value="#{main.coordinateX}"/>
+                        </p:column>
+                        <p:column headerText="Координата Y">
+                            <h:outputText  value="#{main.coordinateY}"/>
+                        </p:column>
+                        <p:column  headerText="Параметр R">
+                            <h:outputText  value="#{main.parametrR}"/>
+                        </p:column>
+                        <p:column headerText="Результат">
+                            <h:outputText  value="#{main.result}"/>
+                            <h:outputScript>#{mainBean.getCommandSet(main.parametrR)}</h:outputScript>
+                            <h:outputScript>#{mainBean.getCommandDraw(main.parametrR)}</h:outputScript>
+                            <h:outputScript>#{mainBean.getDrawingDot()}</h:outputScript>
+                        </p:column>
+                    </p:dataTable>
+                </f:view>
+                </p>
+            </td>
+            <td>
+                    <div>
+                        <h:outputText styleClass="header" value="Координата X"/>
+                    </div>
+                    <div class="round">
+                        <p:commandButton  value="-5" styleClass="number-button"  onclick="set(-5)"  process="@this" event="click" action="#{mainBean.setCoordinateX(-5)}"/>
+                        <h:outputText value=" "/>
+                        <p:commandButton value="-4" styleClass="number-button"   onclick="set(-4)" process="@this" event="click" action="#{mainBean.setCoordinateX(-4)}"/>
+                        <h:outputText value=" "/>
+                        <p:commandButton  value="-3"  styleClass="number-button"  onclick="set(-3)" process="@this" event="click" action="#{mainBean.setCoordinateX(-3)}"/>
+                        <br/>
+                        <p:commandButton value="-2" styleClass="number-button"  onclick="set(-2)" process="@this" event="click" action="#{mainBean.setCoordinateX(-2)}"/>
+                        <h:outputText value=" "/>
+                        <p:commandButton value="-1" styleClass="number-button"  onclick="set(-1)" process="@this" event="click" action="#{mainBean.setCoordinateX(-1)}"/>
+                        <h:outputText value=" "/>
+                        <p:commandButton value="0"  styleClass="number-button"  onclick="set(0)" process="@this" event="click" action="#{mainBean.setCoordinateX(0)}"/>
+                        <br/>
+                        <p:commandButton value="1" styleClass="number-button"  onclick="set(1)"  process="@this" event="click" action="#{mainBean.setCoordinateX(1)}"/>
+                        <h:outputText value=" "/>
+                        <p:commandButton value="2"  styleClass="number-button"  onclick="set(2)" process="@this" event="click" action="#{mainBean.setCoordinateX(2)}"/>
+                        <h:outputText value=" "/>
+                        <p:commandButton value="3" styleClass="number-button"  onclick="set(3)" process="@this" event="click" action="#{mainBean.setCoordinateX(3)}"/>
+                        <br/>
+                    </div>
+<!--                    Надо исправить ситуацию с появлением ошибки при не заполненной координате Y-->
+                    <p  style="display: none" id="xButton"/>
+                    <div>
+                        <h:outputText styleClass="header" value="Координата Y"/>
+                    </div>
+<!--                    Сообщение об ошибке-->
+
+                    <div>
+                        <h:form id="Y">
+                            <p:inputText  id="coordinateY" value="#{mainBean.coordinateY}" onkeypress="setY()" onkeydown="return Check(event.key)">
+                                <f:validator validatorId="mainValidator" for="coordinateY"/>
+                            </p:inputText>
+                            <p:messages  for="coordinateY" style="color: red">
+                                <p:autoUpdate/>
+                            </p:messages>
+                            <p style="display:none;" id="yLine" ></p>
+                            <h:outputText id="YLine" value="#{mainBean.coordinateY}"/>
+                        </h:form>
+
+                    </div>
+                    <div>
+                        <h:outputText styleClass="header" value="Параметр R"/>
+                    </div>
+                    <h:form id="R">
+                        <p:commandLink  id="r1" value="1" update="data"  action="#{mainBean.setParametrR(1)}"  >
+                        </p:commandLink>
+                        <h:outputText value=" "/>
+                        <p:commandLink id="r2" value="2" update="data" action="#{mainBean.setParametrR(2)}" />
+                        <h:outputText value=" "/>
+                        <p:commandLink id="r3" value="3" update="data" action="#{mainBean.setParametrR(3)}"  />
+                        <h:outputText value=" "/>
+                        <p:commandLink id="r4" value="4" update="data" action="#{mainBean.setParametrR(4)}"  />
+                        <h:outputText value=" "/>
+                        <p:commandLink id="r5" value="5" update="data" action="#{mainBean.setParametrR(5)}" />
+                    </h:form>
+
+                    <div>
+                        <p style="display:none;" id="rLink"/>
+                    </div>
+
+                    <div class="wrapper">
+
+                        <p:commandButton id="all" styleClass="send-button"  value="Отправить данные" update="data"  action="#{mainBean.sendData()}">
+
+                        </p:commandButton>
+                    </div>
+                    <div style="height: 100px"/>
+                    <div class="container">
+                    <p:commandLink  styleClass="link" process="@this" event="click" value="Вернуться на стартовую страницу" action="index"/>
+                    </div>
+                <h:form id="click" style="display: none">
+                    <p:commandButton id="b"/>
+                </h:form>
+                <div>
+                    <h:form id="answer" style="display: none">
+                        <h:inputHidden id="x"  value="#{mainBean.testX}"/>
+                        <h:inputHidden id="y" value="#{mainBean.testY}"/>
+                        <h:inputHidden id="r" value="#{mainBean.testR}"/>
+                        <p:commandButton  id="ajax" update="data" action="#{mainBean.sendDot()}"/>
+                    </h:form>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,69 @@
+#dataTable {
+    position: fixed;
+    top : 400px;
+    width: 450px;
+    margin-right: 200px;
+    left: 100px;
+}
+#picture {
+    position: fixed;
+    top: 20px;
+    width: 400px;
+    height: 350px;
+    margin-right: 200px;
+    left: 100px;
+}
+
+#buttonsCoordinateX{
+    left : 800px;
+    position: fixed;
+    top : 30px;
+    height: 150px;
+}
+
+#inputCoordinateY{
+    position: fixed;
+    left: 800px;
+    top : 300px;
+}
+
+#linkParametrR {
+    position: fixed;
+    left: 800px;
+    top : 500px;
+}
+
+#stats{
+    outline: 2px black;
+    width: 100px;
+}
+
+#linkOnStart{
+    top: 20px;
+    position: fixed;
+    left: 1000px;
+}
+
+
+#TextX{
+    position: fixed;
+    left: 800px;
+    top: 0px;
+}
+
+.header {
+    font-size: larger;
+    display: inline-block;
+    position: relative;
+    letter-spacing: .05em;
+    color: black;
+    font-family: "Bookman Old Style";
+    text-shadow: 1px 0px 0px grey;
+
+}
+
+#sendButton{
+    position: fixed;
+    left: 1000px;
+    bottom: 100px
+}
