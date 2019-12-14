@@ -1,4 +1,30 @@
-
+function drawInstruction(){
+    ctx.fillStyle = "black";
+    ctx.font = 'bold 15px sans-serif';
+    ctx.fillText("0",200,160);
+    ctx.fillText("1", 230, 160);
+    ctx.fillText("2", 260, 160);
+    ctx.fillText("3", 290, 160);
+    ctx.fillText("4", 320, 160);
+    ctx.fillText("5", 350, 160);
+    ctx.fillText("-1", 170, 160);
+    ctx.fillText("-2", 140, 160);
+    ctx.fillText("-3", 110, 160);
+    ctx.fillText("-4", 80, 160);
+    ctx.fillText("-5", 50, 160);
+    ctx.fillText("1", 200, 130);
+    ctx.fillText("2", 200, 100);
+    ctx.fillText("3", 200, 70);
+    ctx.fillText("4", 200, 40);
+    ctx.fillText("5", 200, 10);
+    ctx.fillText("-1", 200, 180);
+    ctx.fillText("-2", 200, 210);
+    ctx.fillText("-3", 200, 240);
+    ctx.fillText("-4", 200, 270);
+    ctx.fillText("-5", 200, 300);
+    ctx.fillText("x", 390, 170);
+    ctx.fillText("y", 180, 10);
+}
 function startDrawing() {
     div = document.getElementById("picture");
     canvas = document.createElement("canvas");
@@ -25,28 +51,11 @@ function startDrawing() {
     ctx.lineTo(385, 155);
     ctx.stroke();
     ctx.closePath();
+    drawInstruction();
 }
 function draw(num) {
     ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, 600, 400);
-    ctx.beginPath();
-    ctx.strokeStyle = 'black';
-    ctx.moveTo(200, 400);
-    ctx.lineTo(200, 0);
-    ctx.moveTo(200, 0);
-    ctx.lineTo(195, 15);
-    ctx.moveTo(200, 0);
-    ctx.lineTo(205, 15);
-    ctx.stroke();
-    ctx.strokeStyle = "black";
-    ctx.moveTo(0, 150);
-    ctx.lineTo(400, 150);
-    ctx.moveTo(400,150);
-    ctx.lineTo(385,145);
-    ctx.moveTo(400, 150);
-    ctx.lineTo(385, 155);
-    ctx.stroke();
-    ctx.closePath();
     var R = num;
     ctx.beginPath();
     ctx.strokeStyle = 'blue';
@@ -69,6 +78,25 @@ function draw(num) {
     ctx.arc(200, 150, R*30, Math.PI/2, Math.PI, false);
     ctx.fillStyle = "blue";
     ctx.fill();
+    ctx.beginPath();
+    ctx.strokeStyle = 'black';
+    ctx.moveTo(200, 400);
+    ctx.lineTo(200, 0);
+    ctx.moveTo(200, 0);
+    ctx.lineTo(195, 15);
+    ctx.moveTo(200, 0);
+    ctx.lineTo(205, 15);
+    ctx.stroke();
+    ctx.strokeStyle = "black";
+    ctx.moveTo(0, 150);
+    ctx.lineTo(400, 150);
+    ctx.moveTo(400,150);
+    ctx.lineTo(385,145);
+    ctx.moveTo(400, 150);
+    ctx.lineTo(385, 155);
+    ctx.stroke();
+    ctx.closePath();
+    drawInstruction();
     // for (var i = 0; arrX.length > i; i++){
     //     ctx.beginPath();
     //     ctx.fillStyle = 'red';
@@ -83,7 +111,6 @@ function send() {
         if (document.getElementById("rLink").innerHTML != "") {
             x = ev1.offsetX;
             y = ev1.offsetY;
-            alert(x + " " + y);
             var elemX = document.getElementById("answer:hideX");
             var elemY = document.getElementById("answer:hideY");
             var elemR = document.getElementById("answer:hideR");
