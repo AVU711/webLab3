@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "dots")
+@Table(name = "points")
 public class Dot implements Serializable {
 
     @Id
@@ -34,7 +34,7 @@ public class Dot implements Serializable {
 
     public Dot(){}
 
-    public Dot(String coordinateX, String coordinateY, String parametrR, String result){
+    public Dot( String coordinateX, String coordinateY, String parametrR, String result){
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
         this.parametrR = parametrR;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class myBean  {
     private ArrayList<Dot> history = new ArrayList<>();
+    private DotService dotService = new DotService();
     private String x = "";
     private String y = "";
     private String R = "";
@@ -74,8 +75,10 @@ public class myBean  {
             Double R = Double.parseDouble(this.R.replace(",", "."));
             if ((0.0 <= x && x <= R / 2 && 0.0 <= y && y <= R) || (x <= 0.0 && y <= 0.0 && (x * x + y * y) <= R * R) || (x <= 0 && 0 <= y && y <= x + R)) {
                 history.add(new Dot(this.x, this.y, this.R, "Попадение"));
+                dotService.addDot(new Dot(this.x, this.y, this.R, "Попадение"));
             } else {
-                history.add(new Dot(this.x, this.y, this.R, "Промах"));
+                history.add(new Dot( this.x, this.y, this.R, "Промах"));
+                dotService.addDot(new Dot( this.x, this.y, this.R, "Промах"));
             }
         }else{
             Double x = Double.parseDouble(this.secretX.replace(",", "."));
@@ -83,8 +86,10 @@ public class myBean  {
             Double R = Double.parseDouble(this.secretR.replace(",","."));
             if ((0.0 <= x && x <= R / 2 && 0.0 <= y && y <= R) || (x <= 0.0 && y <= 0.0 && (x * x + y * y) <= R * R) || (x <= 0 && 0 <= y && y <= x + R)) {
                 history.add(new Dot(this.secretX, this.secretY, this.secretR, "Попадение"));
+                dotService.addDot(new Dot(this.secretX, this.secretY, this.secretR, "Попадение"));
             } else {
-                history.add(new Dot(this.secretX, this.secretY, this.secretR, "Промах"));
+                history.add(new Dot( this.secretX, this.secretY, this.secretR, "Промах"));
+                dotService.addDot(new Dot( this.secretX, this.secretY, this.secretR, "Промах"));
             }
         }
 

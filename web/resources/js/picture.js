@@ -105,6 +105,8 @@ function draw(num) {
     //     ctx.closePath();
     // }
 }
+
+//При нажатии возникает неверное значение координаты Y
 function send() {
     ctx = canvas.getContext('2d');
     canvas.onmousedown = function (ev1) {
