@@ -1,0 +1,32 @@
+#head {
+    width: 100%;
+    position: relative;
+    top: 10px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: larger;
+    display: inline-block;
+    position: relative;
+    letter-spacing: .05em;
+    color: black;
+    font-family: "Bookman Old Style";
+    text-shadow: 1px 0px 0px grey;
+}
+
+#table {
+    border: 2px solid black;
+    border-radius: 3px;
+    position: relative;
+    top: 30px;
+}
+
+#table td {
+    border: 2px solid black;
+}
+
+#linkOnMain {
+    position: relative;
+    top : 500px;
+    left : 10px;
+}

@@ -3,8 +3,10 @@ package ru.jsf;
 import java.util.ArrayList;
 
 public class myBean  {
-    private ArrayList<Dot> history = new ArrayList<>();
+
     private DotService dotService = new DotService();
+    private ArrayList<Dot> history = new ArrayList<>();
+
     private String x = "";
     private String y = "";
     private String R = "";

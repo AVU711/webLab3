@@ -55,7 +55,7 @@ function startDrawing() {
 }
 function draw(num) {
     ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, 600, 400);
+    ctx.clearRect(0, 0, 400, 300);
     var R = num;
     ctx.beginPath();
     ctx.strokeStyle = 'blue';
@@ -113,6 +113,7 @@ function send() {
         if (document.getElementById("rLink").innerHTML != "") {
             x = ev1.offsetX;
             y = ev1.offsetY;
+            alert(x + " " + y);
             var elemX = document.getElementById("answer:hideX");
             var elemY = document.getElementById("answer:hideY");
             var elemR = document.getElementById("answer:hideR");
@@ -151,14 +152,14 @@ function showData() {
                         ctx.closePath();
                     } else {
                         ctx.beginPath();
-                        ctx.fillStyle = 'green';
+                        ctx.fillStyle = 'white';
                         ctx.fillRect(x, y, 5, 5);
                         ctx.fill();
                         ctx.closePath();
                     }
                 }else {
                     ctx.beginPath();
-                    ctx.fillStyle = 'yellow';
+                    ctx.fillStyle = 'black';
                     ctx.fillRect(x, y, 5, 5);
                     ctx.fill();
                     ctx.closePath();

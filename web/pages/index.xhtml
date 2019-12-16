@@ -5,30 +5,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://java.sun.com/jsf/html"
       xml:lang="en" lang="en">
-<head>
+
+<h:head>
     <title>Стартовая страница</title>
     <h:outputScript library="js" name="JsFile.js"/>
-</head>
+    <h:outputStylesheet library="css" name="styleOfStart.css"/>
+</h:head>
 <body onload="updateDate(), updateTime()" >
-<table>
-    <tr>
-        Вансович Алексей Игоревич P3202 Вариант 21938
-    </tr>
-    <tr>
-    </tr>
-</table>
+<div id="head">Вансович Алексей Игоревич P3202 Вариант 21938</div>
 <f:view>
+    <div style="display:inline-block;">
+        <table id="table">
+            <tr>
+                <td>Текущее время</td>
+                <td><div id="Time">
+                    <h:outputText id="time"/>
+                </div></td>
+            </tr>
+            <tr>
+                <td>Текущая дата</td>
+                <td>
+                    <div id="Date">
+                        <h:outputText id="date"/>
+                    </div>
+                </td>
+            </tr>
 
-    <h:outputText id="time"/>
-    <br/>
-    <h:outputText id="date"/>
+        </table>
+    </div>
 
-    <h:form>
-<!--        Навигация нужна в отдельном файле-->
-        <h:commandLink  value="Перейти на главную страницу" action="main"/>
-    </h:form>
-
+    <div id="linkOnMain">
+        <h:form>
+            <h:commandLink  value="Перейти на главную страницу" action="main"/>
+        </h:form>
+    </div>
 </f:view>
-
 </body>
 </html>

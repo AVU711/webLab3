@@ -8,6 +8,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:P="http://java.sun.com/jsf/html">
 <h:head>
     <h:outputStylesheet library="css" name="styleOfMain.css"/>
+    <h:outputScript library="js"  name="JsFile1.js"/>
     <h:outputScript library="js" name="picture.js"/>
 </h:head>
 <body onload="startDrawing(),send()">
@@ -68,10 +69,11 @@
     <div id="inputCoordinateY" style="display: inline-block">
         <p class="header">Координата Y</p>
         <h:form id="Y">
-            <p:inputText autocomplete="false"  id="coordinateY"  value="#{myBean.y}">
-                <p:ajax event="keyup" update="@this"/>
+            <p:inputText autocomplete="false"  id="coordinateY" onkeydown="return Check(event.key)"  value="#{myBean.y}">
+                <p:ajax event="keyup" update="@this,message"/>
+                <f:validator  for="coordinateY" validatorId="mainValidator"/>
             </p:inputText>
-            <p:message for="coordinateY" style="color:red;"/>
+            <p:message id="message" for="coordinateY" style="color:red;"/>
         </h:form>
     </div>
 
