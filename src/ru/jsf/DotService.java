@@ -1,30 +1,35 @@
 package ru.jsf;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DotService {
-    EntityManager em = Persistence.createEntityManagerFactory("hibernate").createEntityManager();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate");
+
 
     public  void  addDot(Dot dot){
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(dot);
         em.getTransaction().commit();
     }
 
-    public void getAll(){
+    public ArrayList<Dot> getAll(){
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Query query = em.createQuery("select p from points p");
-        List<Dot> list = query.getResultList();
-        for (int i = 0; i < list.size(); i ++){
-            System.out.println(list.get(i));
+        List<String> coordinatesX = (List<String>) em.createQuery("select coordinateX  from Dot", String.class)
+                .getResultList();
+        List<String> coordinatesY = (List<String>) em.createQuery("select coordinateY from Dot", String.class)
+                .getResultList();
+        List<String> parametrsR = (List<String>) em.createQuery("select parametrR from Dot", String.class)
+                .getResultList();
+        List<String> results = (List<String>) em.createQuery("select result from Dot", String.class).getResultList();
+        ArrayList<Dot> dots = new ArrayList<>();
+        for (int i = 0; i < coordinatesX.size(); i ++){
+            dots.add(new Dot(coordinatesX.get(i),coordinatesY.get(i), parametrsR.get(i), results.get(i)));
         }
-        em.getTransaction().commit();
-
+        return dots;
     }
 }

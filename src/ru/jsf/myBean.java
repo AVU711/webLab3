@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class myBean  {
 
     private DotService dotService = new DotService();
-    private ArrayList<Dot> history = new ArrayList<>();
+    private ArrayList<Dot> history = dotService.getAll();
 
     private String x = "";
     private String y = "";

@@ -113,7 +113,6 @@ function send() {
         if (document.getElementById("rLink").innerHTML != "") {
             x = ev1.offsetX;
             y = ev1.offsetY;
-            alert(x + " " + y);
             var elemX = document.getElementById("answer:hideX");
             var elemY = document.getElementById("answer:hideY");
             var elemR = document.getElementById("answer:hideR");
