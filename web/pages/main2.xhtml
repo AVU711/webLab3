@@ -69,7 +69,7 @@
     <div id="inputCoordinateY" style="display: inline-block">
         <p class="header">Координата Y</p>
         <h:form id="Y">
-            <p:inputText autocomplete="false"  id="coordinateY" onkeydown="return Check(event.key)"  value="#{myBean.y}">
+            <p:inputText autocomplete="off"  id="coordinateY" onkeydown="return Check(event.key)"  value="#{myBean.y}">
                 <p:ajax event="keyup" update="@this,message"/>
                 <f:validator  for="coordinateY" validatorId="mainValidator"/>
             </p:inputText>
