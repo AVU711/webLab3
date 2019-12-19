@@ -10,6 +10,7 @@
     <h:outputStylesheet library="css" name="styleOfMain.css"/>
     <h:outputScript library="js"  name="JsFile1.js"/>
     <h:outputScript library="js" name="picture.js"/>
+    <h:outputScript library="js" name="error.js"/>
 </h:head>
 <body onload="startDrawing(),send()">
 <f:view>
@@ -66,33 +67,39 @@
             </p:column>
         </p:dataTable>
     </div>
+    <h:form>
     <div id="inputCoordinateY" style="display: inline-block">
         <p class="header">Координата Y</p>
-        <h:form id="Y">
-            <p:inputText autocomplete="off"  id="coordinateY" onkeydown="return Check(event.key)"  value="#{myBean.y}">
-                <p:ajax event="keyup" update="@this,message"/>
-                <f:validator  for="coordinateY" validatorId="mainValidator"/>
+            <p:inputText   id="coordinateY"  autocomplete="off" onkeydown="return Check(event.key)"  value="#{myBean.y}"  required="true" validatorMessage="Неверное значение, верный диапозон от -3 до 3" requiredMessage="Забыли ввести">
+<!--                <p:ajax event="keyup"  update="@this,message"/>-->
+<!--                <f:validator  for="coordinateY" validatorId="mainValidator"/>-->
+                <f:validateDoubleRange for="coordinateY" minimum="-3.0" maximum="3.0"/>
             </p:inputText>
-            <p:message id="message" for="coordinateY" style="color:red;"/>
-        </h:form>
+            <p:message id="message" for="coordinateY"  style="color:red;"/>
+        <p id="Error"/>
+
     </div>
 
     <div id="linkParametrR">
         <p class="header">Параметр R</p>
-        <h:form id="R">
-            <p:commandLink  id="r1" value="1" onclick="draw(1);setR(1);showData()" update="This"  action="#{myBean.setR(1)}"  >
+            <p:commandLink  id="r1" value="1" onclick="draw(1);setR(1);showData()" update="This" process="@this"  action="#{myBean.setR(1)}"  >
             </p:commandLink>
             <h:outputText value=" "/>
-            <p:commandLink id="r2" value="2" onclick="draw(2);setR(2);showData()" update="This" action="#{myBean.setR(2)}" />
+            <p:commandLink id="r2" value="2" onclick="draw(2);setR(2);showData()" update="This" process="@this" action="#{myBean.setR(2)}" />
             <h:outputText value=" "/>
-            <p:commandLink id="r3" value="3" onclick="draw(3);setR(3);showData()" update="This" action="#{myBean.setR(3)}"  />
+            <p:commandLink id="r3" value="3" onclick="draw(3);setR(3);showData()" update="This" process="@this" action="#{myBean.setR(3)}"  />
             <h:outputText value=" "/>
-            <p:commandLink id="r4" value="4" onclick="draw(4);setR(4);showData()" update="This" action="#{myBean.setR(4)}"  />
+            <p:commandLink id="r4" value="4" onclick="draw(4);setR(4);showData()" update="This" process="@this" action="#{myBean.setR(4)}"  />
             <h:outputText value=" "/>
-            <p:commandLink id="r5" value="5" onclick="draw(5);setR(5);showData()" update="This" action="#{myBean.setR(5)}" />
-        </h:form>
+            <p:commandLink id="r5" value="5" onclick="draw(5);setR(5);showData()" update="This" process="@this" action="#{myBean.setR(5)}" />
         <p style="display:none;" id="rLink"/>
     </div>
+    <div id="sendButton">
+        <p:commandButton update="data message" process="@this coordinateY" value="Отправить данные"    action="#{myBean.addDot(true)}" onclick="checkXorR()">
+        </p:commandButton>
+
+    </div>
+    </h:form>
     <div>
         <h:form id="This">
             <label for="x">Координата X</label>
@@ -103,15 +110,13 @@
             <br/>
             <h:outputText id="r" value="#{myBean.r}"/>
         </h:form>
+
     </div>
-    <div id="linkOnStart">
-        <p:commandLink  styleClass="link" process="@this" event="click" value="Вернуться на стартовую страницу" action="index"/>
-    </div>
-    <div id="sendButton">
-        <h:form>
-            <p:commandButton update="data" value="Отправить данные"   action="#{myBean.addDot(true)}"/>
-        </h:form>
-    </div>
+
+
+<div id="linkOnStart">
+    <p:commandLink  styleClass="link" process="@this" event="click" value="Вернуться на стартовую страницу" action="index"/>
+</div>
     <div id="hide">
         <h:form id="answer" style="display:none;">
             <h:inputHidden id="hideX"  value="#{myBean.secretX}"/>

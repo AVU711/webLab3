@@ -26,6 +26,7 @@ public class DotService {
         List<String> parametrsR = (List<String>) em.createQuery("select parametrR from Dot", String.class)
                 .getResultList();
         List<String> results = (List<String>) em.createQuery("select result from Dot", String.class).getResultList();
+        em.getTransaction().commit();
         ArrayList<Dot> dots = new ArrayList<>();
         for (int i = 0; i < coordinatesX.size(); i ++){
             dots.add(new Dot(coordinatesX.get(i),coordinatesY.get(i), parametrsR.get(i), results.get(i)));
