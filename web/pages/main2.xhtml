@@ -70,10 +70,10 @@
     <h:form>
     <div id="inputCoordinateY" style="display: inline-block">
         <p class="header">Координата Y</p>
-            <p:inputText   id="coordinateY"  autocomplete="off" onkeydown="return Check(event.key)"  value="#{myBean.y}"  required="true" validatorMessage="Неверное значение, верный диапозон от -3 до 3" requiredMessage="Забыли ввести">
+            <p:inputText   id="coordinateY"  autocomplete="off" onkeydown="return Check(event.key)"  value="#{myBean.y}" >
 <!--                <p:ajax event="keyup"  update="@this,message"/>-->
-<!--                <f:validator  for="coordinateY" validatorId="mainValidator"/>-->
-                <f:validateDoubleRange for="coordinateY" minimum="-3.0" maximum="3.0"/>
+                <f:validator  for="coordinateY" validatorId="mainValidator"/>
+<!--                <f:validateDoubleRange for="coordinateY" minimum="-3.0" maximum="3.0"/>-->
             </p:inputText>
             <p:message id="message" for="coordinateY"  style="color:red;"/>
         <p id="Error"/>
